@@ -4,10 +4,14 @@ import {
   addCupslock,
   addShift,
   remoteShift,
+  addToggleCapsLock,
 } from "./scr/changeLangAndCaps";
-import { addTextContent } from "./scr/addTetxcontent";
+import { addTextContent, clickTextContent } from "./scr/addTetxcontent";
 
 const buttons = document.querySelectorAll(".keyboard__input button");
+// const textarea = document.querySelector(".textarea");
+// textarea.addEventListener('keydown', e => e.preventDefault());
+// setTimeout(function(){textarea.focus()}, 10)
 
 buttons.forEach((el, ind) => {
   el.setAttribute("id", `${KEYBOARD[ind].code}`);
@@ -22,17 +26,6 @@ function addPushingStyle(e) {
   button.classList.add("push");
 }
 
-function addToggleCapsLock(e) {
-  const ind = e.target.parentElement.id || e.target.id;
-  const button = document.querySelector(`button[id="${ind}"]`);
-
-  console.log(button);
-
-  if (ind === "CapsLock") {
-    button.classList.toggle("push");
-  }
-}
-
 function deleteBorder(e) {
   if (e.code === "CapsLock") return;
   const button = document.querySelector(`button[id="${e.code}"]`);
@@ -44,6 +37,7 @@ document.body.addEventListener("keydown", addCupslock);
 document.body.addEventListener("keydown", addShift);
 document.body.addEventListener("keydown", addTextContent);
 buttons.forEach((el) => el.addEventListener("click", addToggleCapsLock));
+buttons.forEach((el) => el.addEventListener("click", clickTextContent));
 window.addEventListener("keyup", remoteShift);
 window.addEventListener("keyup", deleteBorder);
 changeLanguage();

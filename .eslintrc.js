@@ -11,6 +11,7 @@ module.exports = {
         "import/prefer-default-export": 0,
         "prefer-template": 0,
         "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["el"] }],
+        "parser": "@babel/eslint-parser"
     },
 
 };

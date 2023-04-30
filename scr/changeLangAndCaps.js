@@ -1,10 +1,14 @@
 import { KEYBOARD, SPANS } from "./keyboard";
 
-export const mode = {
-  russianFlag: localStorage.getItem("russianFlag") || "false",
-  isCapslock: false,
-  isShift: false,
+ class Mode {
+  constructor(){}
+  russianFlag = localStorage.getItem("russianFlag") || "false";
+  isCapslock = false;
+  isShift = false;
 };
+
+export const mode = new Mode();
+console.log(mode);
 
 const mainSumbol = document.querySelectorAll(".main-symbol");
 const spans = document.querySelectorAll(".symbol");
@@ -123,3 +127,24 @@ export function remoteShift(e){
   if (e.code !== "ShiftRight" && e.code !== "ShiftLeft") return;
   mode.isShift = false;
 }
+
+export function addToggleCapsLock(e) {
+  const ind = e.target.parentElement.id || e.target.id;
+  const button = document.querySelector(`button[id="${ind}"]`);
+
+
+  if (ind === "CapsLock") {
+    button.classList.toggle("push");
+    if( mode.isCapslock === true){
+      mode.isCapslock = false
+    } else {
+      mode.isCapslock = true;
+    }
+
+    console.log(mode);
+    addModes();
+  }
+
+}
+
+
