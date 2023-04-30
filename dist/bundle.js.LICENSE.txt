@@ -1,0 +1,1 @@
+//!e.target.id ? ind = e.target.parentElement.id : ind = e.target.id;
