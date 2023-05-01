@@ -48,9 +48,9 @@ body {
 }
 
 .keyboard__input button:active {
-  transform: scale(.99);
+  transform: scale(.97);
   border-color: #ffc600;
-  box-shadow: 0 0 .2rem #ffc600;
+  box-shadow: 0 0 .5rem #ffc600;
 }
 
 .symbol {

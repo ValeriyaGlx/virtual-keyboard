@@ -3,70 +3,113 @@ import { mode } from "./changeLangAndCaps";
 
 const textarea = document.querySelector(".textarea");
 
+function getValue (value) {
+  const cursor = textarea.selectionStart;
 
-export function addTextContent (e, index) {
+  textarea.value =
+    textarea.value.slice(0, textarea.selectionStart) +
+    value +
+    textarea.value.slice(textarea.selectionStart);
+
+  textarea.selectionStart = cursor + 1;
+  textarea.selectionEnd = cursor + 1;
+};
+
+   function deleteValue (btn) {
+  const cursor = textarea.selectionStart;
+  const value = btn === "Delete" ? cursor : cursor - 1;
+  textarea.value =
+    textarea.value.slice(0, value) + textarea.value.slice(value + 1);
+
+  textarea.selectionStart = value;
+  textarea.selectionEnd = value;
+};
+
+export function addTextContent(e, index) {
   textarea.focus();
 
   KEYBOARD.forEach((el) => {
-    if(el.code === index && index === "Tab"){
+    if (el.code === index && index === "Tab") {
       e.preventDefault();
-      textarea.value  += "\t";
+      getValue("\t");
     }
 
     if (el.code === index && index === "Enter") {
       e.preventDefault();
-      textarea.value  += "\n";
+      getValue("\n");
     }
 
     if (el.code === index && index === "Backspace") {
       e.preventDefault();
-      textarea.value  = textarea.value.slice(0, textarea.value.length - 1);
+      deleteValue("Backspace");
     }
 
-    if (el.code ===index && el.output === "true") {
+    if (el.code === index && index === "Delete") {
+      e.preventDefault();
+      deleteValue("Delete");
+    }
+
+    if (el.code === index && el.output === "true") {
       e.preventDefault();
       if (!mode.isCapslock && mode.russianFlag === "false" && !mode.isShift) {
-        textarea.value  += el.english;
+        getValue(el.english);
       }
 
       if (mode.isCapslock && mode.russianFlag === "false" && !mode.isShift) {
-        textarea.value  += el.english_caps;
+        getValue(el.english_caps);
       }
 
       if (!mode.isCapslock && mode.russianFlag === "true" && !mode.isShift) {
-        textarea.value += el.russian;
+        getValue(el.russian);
       }
 
       if (mode.isCapslock && mode.russianFlag === "true" && !mode.isShift) {
-        textarea.value  += el.russian_caps;
+        getValue(el.russian_caps);
       }
 
       if (!mode.isCapslock && mode.russianFlag === "false" && mode.isShift) {
-        textarea.value  += el.english_shift;
+        getValue(el.english_shift);
       }
 
       if (mode.isCapslock && mode.russianFlag === "false" && mode.isShift) {
-        textarea.value  += el.english;
+        getValue(el.english);
       }
 
       if (!mode.isCapslock && mode.russianFlag === "true" && mode.isShift) {
-        textarea.value  += el.russian_shift;
+        getValue(el.russian_shift);
       }
 
       if (mode.isCapslock && mode.russianFlag === "true" && mode.isShift) {
-        textarea.value  += el.russian;
+        getValue(el.russian);
       }
     }
   });
 }
 
-export function clickArrowNavigation(e){
+export function clickArrowNavigation(e) {
   const index = e.target.parentElement.id || e.target.id;
- 
-  if(index !== 'ArrowLeft' && index !== 'ArrowRight' && index !== 'ArrowUp' && index !== 'ArrowDown') return;
-  console.log(index);
-   textarea.selectionStart = textarea.selectionStart - 1;
-  //setTimeout(function(){textarea.focus()}, 100)
-  //textarea.focus()
-  console.log(textarea.value.length);
+
+  if (
+    index !== "ArrowLeft" &&
+    index !== "ArrowRight" &&
+    index !== "ArrowUp" &&
+    index !== "ArrowDown"
+  )
+    return;
+  if (index === "ArrowLeft") {
+    getValue("◄");
+  }
+
+  if (index === "ArrowRight") {
+    getValue("►");
+  }
+
+  if (index === "ArrowUp") {
+    getValue("▲");
+  }
+
+  if (index === "ArrowDown") {
+    getValue("▼");
+  }
 }
+
