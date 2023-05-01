@@ -32,10 +32,11 @@ function deleteBorder(e) {
 document.body.addEventListener("keydown", addPushingStyle);
 document.body.addEventListener("keydown", addCupslock);
 document.body.addEventListener("keydown", addShift);
+window.addEventListener("keyup", remoteShift);
 document.body.addEventListener("keydown", e => addTextContent(e, e.code));
 buttons.forEach((el) => el.addEventListener("click", addToggleCapsLock));
 buttons.forEach((el) => el.addEventListener("click", clickArrowNavigation));
 buttons.forEach((el) => el.addEventListener("click", e => addTextContent(e, e.target.parentElement.id || e.target.id)));
-window.addEventListener("keyup", remoteShift);
+
 window.addEventListener("keyup", deleteBorder);
 changeLanguage();

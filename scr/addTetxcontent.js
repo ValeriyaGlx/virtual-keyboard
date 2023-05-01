@@ -15,7 +15,9 @@ function getValue (value) {
   textarea.selectionEnd = cursor + 1;
 };
 
-   function deleteValue (btn) {
+  function deleteValue (btn) {
+    if(btn === "Backspace" &&  textarea.selectionStart===0) {return};
+
   const cursor = textarea.selectionStart;
   const value = btn === "Delete" ? cursor : cursor - 1;
   textarea.value =
@@ -72,7 +74,7 @@ export function addTextContent(e, index) {
       }
 
       if (mode.isCapslock && mode.russianFlag === "false" && mode.isShift) {
-        getValue(el.english);
+        getValue(el.english_shift);
       }
 
       if (!mode.isCapslock && mode.russianFlag === "true" && mode.isShift) {
@@ -80,7 +82,7 @@ export function addTextContent(e, index) {
       }
 
       if (mode.isCapslock && mode.russianFlag === "true" && mode.isShift) {
-        getValue(el.russian);
+        getValue(el.russian_shift);
       }
     }
   });

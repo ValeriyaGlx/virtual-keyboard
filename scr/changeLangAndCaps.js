@@ -138,7 +138,6 @@ export function addToggleCapsLock(e) {
     } else {
       mode.isCapslock = true;
     }
-
     addModes();
   }
 }
