@@ -6,12 +6,9 @@ import {
   remoteShift,
   addToggleCapsLock,
 } from "./scr/changeLangAndCaps";
-import { addTextContent, clickTextContent } from "./scr/addTetxcontent";
+import { addTextContent, clickArrowNavigation } from "./scr/addTetxcontent";
 
 const buttons = document.querySelectorAll(".keyboard__input button");
-// const textarea = document.querySelector(".textarea");
-// textarea.addEventListener('keydown', e => e.preventDefault());
-// setTimeout(function(){textarea.focus()}, 10)
 
 buttons.forEach((el, ind) => {
   el.setAttribute("id", `${KEYBOARD[ind].code}`);
@@ -35,9 +32,10 @@ function deleteBorder(e) {
 document.body.addEventListener("keydown", addPushingStyle);
 document.body.addEventListener("keydown", addCupslock);
 document.body.addEventListener("keydown", addShift);
-document.body.addEventListener("keydown", addTextContent);
+document.body.addEventListener("keydown", e => addTextContent(e, e.code));
 buttons.forEach((el) => el.addEventListener("click", addToggleCapsLock));
-buttons.forEach((el) => el.addEventListener("click", clickTextContent));
+buttons.forEach((el) => el.addEventListener("click", clickArrowNavigation));
+buttons.forEach((el) => el.addEventListener("click", e => addTextContent(e, e.target.parentElement.id || e.target.id)));
 window.addEventListener("keyup", remoteShift);
 window.addEventListener("keyup", deleteBorder);
 changeLanguage();

@@ -788,13 +788,13 @@ const dataSpans = `[
 
     {
         "code": "BracketLeft",
-        "english": "[",
+        "english": "{",
         "russian": ""
     },
 
     {
         "code": "BracketRight",
-        "english": "]",
+        "english": "}",
         "russian": ""
     },
 
@@ -830,7 +830,7 @@ const dataSpans = `[
 document.body.innerHTML = `
 <div class="keyboard">
 <div class="keyboard__output">
-    <textarea class="textarea" name="" id="" cols="30" rows="10" placeholder="Сделано на Windows ОС. Переключение языка левые Shift + Alt."></textarea>
+    <textarea class="textarea" name="" id="" cols="30" rows="10" autocorrect="off" placeholder="Сделано на Windows ОС. Переключение языка левые Shift + Alt."></textarea>
 </div>
 <div class="keyboard__input">
     <button><span class="symbol" >~</span><span class="main-symbol" >\`</span></button>
