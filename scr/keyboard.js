@@ -822,10 +822,7 @@ const dataSpans = `[
         "russian": ","
     }
 ]
-    `
-
-
-
+    `;
 
 document.body.innerHTML = `
 <div class="keyboard">
@@ -902,4 +899,3 @@ document.body.innerHTML = `
 
 export const KEYBOARD = JSON.parse(data);
 export const SPANS = JSON.parse(dataSpans);
-
